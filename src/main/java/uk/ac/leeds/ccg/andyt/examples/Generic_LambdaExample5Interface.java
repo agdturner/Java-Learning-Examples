@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 geoagdt.
+ * Copyright (C) 2018 Andy Turner, University of Leeds..
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,17 +18,32 @@
  */
 package uk.ac.leeds.ccg.andyt.examples;
 
-import java.util.Comparator;
-
 /**
+ * Uses a simple interface Function3 which returns a String built from a char[].
+ * Adapted from http://tutorials.jenkov.com/java/lambda-expressions.html.
  *
- * @author geoagdt
+ * @author Andy Turner
  */
-public class Generic_LambdaExample2 {
+public class Generic_LambdaExample5Interface {
+
+    public static String doCreate(char[] c) {
+        return new String(c);
+    }
+
+    public void run() {
+
+        Function3 f = (c) -> {
+            return doCreate(c);
+        };
+
+        String s;
+
+        s = f.create("Hello World".toCharArray());
+
+        System.out.println(s);
+    }
 
     public static void main(String[] args) {
-        Function1 f = () -> {System.out.println("Hello World");};
-        
-        f.apply();
+        new Generic_LambdaExample5Interface().run();
     }
 }

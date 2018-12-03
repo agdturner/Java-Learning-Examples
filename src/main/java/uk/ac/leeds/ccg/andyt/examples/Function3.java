@@ -18,17 +18,14 @@
  */
 package uk.ac.leeds.ccg.andyt.examples;
 
-import java.util.Comparator;
-
 /**
+ * An interface with a single abstract method which takes in one variable and
+ * returns another.
  *
- * @author geoagdt
+ * @author Andy Turner
  */
-public class Generic_LambdaExample3 {
+public interface Function3 {
 
-    public static void main(String[] args) {
-        Function1 f = () -> {System.out.println("Hello World");};
-        
-        f.apply();
-    }
+    public String create(char[] val);
+    
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 geoagdt.
+ * Copyright (C) 2018 Andy Turner, University of Leeds..
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,34 +18,33 @@
  */
 package uk.ac.leeds.ccg.andyt.examples;
 
-import java.util.Comparator;
-
 /**
+ * Uses a simplest interface Function2 to print "Hello World" by concatenating
+ * String variables one of which is declared outside the lamdba expression.
+ * Adapted from http://tutorials.jenkov.com/java/lambda-expressions.html.
  *
- * @author geoagdt
+ * @author Andy Turner
  */
-public class Generic_LambdaExample {
+public class Generic_LambdaExample3InterfaceHelloWorld {
 
+    static String s2 = "Life is Good!";
+    
     public static void main(String[] args) {
-        Comparator<String> stringComparator = new Comparator<String>() {
-            @Override
-            public int compare(String t, String t1) {
-                return t.compareTo(t1);
-            }
+
+        //String s1; // This is effectively final so best to declare it final.
+        final String s1;
+        s1 = "Hello";
+        
+        Function2 f = (s) -> {
+            System.out.println(s1 + " " + s + ": " + s2);
         };
 
-        int compareValue = stringComparator.compare("hello", "world");
-        System.out.println(compareValue);
-
-        Comparator<String> stringComparator2 = (String t, String t1) -> t.compareTo(t1);
-
-        int compareValue2 = stringComparator2.compare("hello", "world");
-        System.out.println(compareValue2);
+        System.out.println(s2);
         
-        Comparator<String> stringComparator3 = (t, t1) -> t.compareTo(t1);
-
-        int compareValue3 = stringComparator3.compare("hello", "world");
-        System.out.println(compareValue3);
-
+        f.apply("World");
+        
+        //s1 = "Can I change this?: No! It will lead to a compilation error.";
+        s2 = "I can change this!";
+        System.out.println(s2);
     }
 }

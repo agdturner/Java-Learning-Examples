@@ -19,10 +19,14 @@
 package uk.ac.leeds.ccg.andyt.examples;
 
 /**
- * The simplest interface.
+ * Uses the simplest interface Function1 to print "Hello World". 
+ * Adapted from http://tutorials.jenkov.com/java/lambda-expressions.html.
  * @author Andy Turner
  */
-public interface Function1 {
-    
-    public void apply(); 
+public class Generic_LambdaExample2InterfaceHelloWorld {
+
+    public static void main(String[] args) {
+        Function1 f = () -> {System.out.println("Hello World");};
+        f.apply();
+    }
 }

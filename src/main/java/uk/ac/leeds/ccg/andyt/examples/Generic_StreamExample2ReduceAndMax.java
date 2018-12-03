@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 geoagdt.
+ * Copyright (C) 2018 Andy Turner, University of Leeds.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,49 +20,56 @@ package uk.ac.leeds.ccg.andyt.examples;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
+import java.util.Comparator;
 import uk.ac.leeds.ccg.andyt.generic.io.Generic_StaticIO;
 
-
 /**
+ * A simple example for returning or printing the longest line in a file. For
+ * more excellent examples of Stream processing please see Joey James' tutorial
+ * and code: https://youtu.be/t1-YZ6bF-g0
+ * https://github.com/joeyajames/Java/blob/master/Java%208%20Streams/JavaStreams.java
  *
- * @author geoagdt
+ * @author Andy Turner
  */
-public class Generic_LambdaExampleStreamFilter {
+public class Generic_StreamExample2ReduceAndMax {
 
     /**
-     * A simple example for filtering an input stream.
-     * @param args 
+     * @param args
      */
     public static void main(String[] args) {
 
+        /**
+         * Set up the stream.
+         */
         File dir;
         dir = new File(System.getProperty("user.dir"));
         dir = new File(dir, "data");
         dir = new File(dir, "input");
         File f;
-        f = new File(dir, "test2.txt");
+        f = new File(dir, "test.txt");
         BufferedReader r;
+        /**
+         * Example using reduce.
+         */
         r = Generic_StaticIO.getBufferedReader(f);
-        String header;
-        try {
-            header = r.readLine();
-                    System.out.println(header);
-        } catch (IOException ex) {
-            Logger.getLogger(Generic_LambdaExampleStreamFilter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        List<String> linesWithIDGT2 = r.lines()
-//                .filter(x -> true)
-//                .filter(x -> x.split(",").length == 4)
-//                .filter(x -> x.split(",")[0].equalsIgnoreCase("2"))
-                .filter(x -> new Integer(x.split(",")[0]) > 2)
-                .collect(Collectors.toList());
-        linesWithIDGT2.forEach(System.out::println);
-        
+        String longestLine = r.lines()
+                .reduce((x, y) -> {
+                    if (x.length() > y.length()) {
+                        return x;
+                    }
+                    return y;
+                })
+                .get();
+        System.out.println(longestLine);
+        /**
+         * Example using max.
+         */
+        r = Generic_StaticIO.getBufferedReader(f);
+        String longestLine2 = r.lines()
+                .max(Comparator.comparingInt(String::length))
+                .get();
+        System.out.println(longestLine2);
+
     }
-    
+
 }

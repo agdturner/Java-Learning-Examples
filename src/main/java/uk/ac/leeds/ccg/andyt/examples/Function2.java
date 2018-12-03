@@ -19,11 +19,10 @@
 package uk.ac.leeds.ccg.andyt.examples;
 
 /**
- *
- * @author geoagdt
+ * An interface with a single abstract method which takes in one variables.
+ * @author Andy Turner
  */
-//public interface Function2 implements FunctionalInterface {
 public interface Function2 {
     
-    public void apply(); 
+    public void apply(String s); 
 }
